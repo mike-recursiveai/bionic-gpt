@@ -6,6 +6,23 @@ use daisy_rsx::*;
 use dioxus::prelude::*;
 
 #[component]
+fn SpeechToTextButton() -> Element {
+    rsx! {
+        button {
+            id: "speech-to-text-button",
+            class: "h-8 w-8 p-2 bg-secondary rounded-full",
+            "type": "button",
+            img {
+                class: "svg-icon",
+                width: "48",
+                height: "48",
+                src: microphone_svg.name
+            }
+        }
+    }
+}
+
+#[component]
 fn AttachButton() -> Element {
     rsx! {
         div {
@@ -94,12 +111,15 @@ pub fn Form(
                 }
 
                 TextArea {
+                    id: "prompt-textarea",
                     class: "pt-3 auto-expand max-h-96 text-sm submit-on-enter flex-1 resize-none",
                     rows: "1",
                     placeholder: "Ask a question...",
                     name: "message",
                     disabled: lock_console
                 }
+
+                SpeechToTextButton {}
 
                 SendMessageButton {
                     lock_console
